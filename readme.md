@@ -1,6 +1,6 @@
 ## Understanding kube-proxy on Self-Managed Kubernetes 
 
-A simple demo application 
+### Create simple demo application 
 ```
 git clone https://github.com/xxradar/app_routable_demo.git
 cd ./app_routable_demo
@@ -8,34 +8,36 @@ cd ./app_routable_demo
 watch kubectl get po -n app-routable-demo
 ```
 
-Get a list of all pods in the namespace
+### Anaylse the app
+
+##### Get a list of all pods in the namespace
 ```
 kubectl get po -n app-routable-demo -o wide --show-labels
 ```
 
-We can select pods using a selector
+##### We can select pods using a selector
 ```
 kubectl get po -n app-routable-demo -o wide -l app=echoserver-1
 ```
 
-We can scale the deployment
+##### We can scale the deployment
 ```
 kubectl scale deploy echoserver-1-deployment --replicas=5 -n app-routable-demo
 kubectl get po -n app-routable-demo -o wide -l app=echoserver-1
 ```
 
-We can get the svc in a namespace
+##### We can get the svc in a namespace
 ```
 kubectl get svc -n app-routable-demo -o wide
 ```
 These CLUSTER-IP are choosen from the service CIDR
 
-And take a detailed look at a svc
+##### And take a detailed look at a svc
 ```
 kubectl describe svc zone6 -n app-routable-demo
 ```
 
-Example
+##### Accessing the service fro;m within a pod
 ```
 kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
 ```
@@ -43,7 +45,7 @@ kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
 
 
 
-So how is this implemented ?  
+### So how is this implemented ?  
 ```
 sudo iptables --list -t nat
 ```
@@ -91,7 +93,7 @@ DNAT       tcp  --  anywhere             anywhere             /* app-routable-de
 ...
 ```
 
-Let's create / update a nodeport service
+### Let's create / update a nodeport service
 
 ```
 $ cat node-zone1.yaml
