@@ -47,10 +47,13 @@ kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
 sudo iptables --list -t nat
 ```
 
-Kube-proxy creates a set of chains
+Kube-proxy creates a set of chains<br>
 One of the first to be hit is ... 
 
 
+```
+sudo iptables --list KUBE-SERVICES -t nat
+```
 ```
 Chain KUBE-SERVICES (2 references)
 target     prot opt source               destination
@@ -61,7 +64,9 @@ KUBE-SVC-RGCN5N2WQYBIR5LN  tcp  --  anywhere             10.109.197.25        /*
 ```
 
 There is also a chain created todo the distribution ...
-
+```
+sudo iptables --list KUBE-SVC-RGCN5N2WQYBIR5LN -t nat
+```
 ```
 Chain KUBE-SVC-RGCN5N2WQYBIR5LN (1 references)
 target     prot opt source               destination
@@ -71,6 +76,10 @@ KUBE-SEP-OFLDMAZYM3MKDZOA  all  --  anywhere             anywhere             /*
 ```
 
 
+
+```
+sudo iptables --list KUBE-SEP-VFQ5BKTMS2WQMEDV -t nat
+```
 ```
 ...
 Chain KUBE-SEP-VFQ5BKTMS2WQMEDV (1 references)
@@ -91,7 +100,9 @@ DNAT       tcp  --  anywhere             anywhere             /* app-routable-de
 ```
 
 ### Let's create / update a nodeport service
-
+```
+sudo iptables --list KUBE-NODEPORTS -t nat
+```
 ```
 $ cat node-zone1.yaml
 apiVersion: v1
@@ -113,7 +124,9 @@ spec:
 
   kubectl apply -f node-zone1.yaml -n app-routable-demo 
 ```
-
+```
+sudo iptables --list KUBE-NODEPORTS -t nat
+```
 ```
 Chain KUBE-NODEPORTS (1 references)
 target     prot opt source               destination
