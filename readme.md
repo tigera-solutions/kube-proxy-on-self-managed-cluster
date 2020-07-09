@@ -37,13 +37,10 @@ These CLUSTER-IP are choosen from the service CIDR
 kubectl describe svc zone6 -n app-routable-demo
 ```
 
-##### Accessing the service fro;m within a pod
+##### Accessing the service from within a pod
 ```
 kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
 ```
-
-
-
 
 ### So how is this implemented ?  
 ```
