@@ -105,7 +105,7 @@ DNAT       tcp  --  anywhere             anywhere             /* app-routable-de
 sudo iptables --list KUBE-NODEPORTS -t nat
 ```
 ```
-$ kubectl appy -f - <<EOF
+$ kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Service
 metadata:
