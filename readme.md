@@ -105,7 +105,7 @@ DNAT       tcp  --  anywhere             anywhere             /* app-routable-de
 sudo iptables --list KUBE-NODEPORTS -t nat
 ```
 ```
-$ cat node-zone1.yaml
+$ kubectl appy -f - <<EOF
 apiVersion: v1
 kind: Service
 metadata:
@@ -121,9 +121,7 @@ spec:
   selector:
     app: nginx-zone1
   type: NodePort
-
-
-  kubectl apply -f node-zone1.yaml -n app-routable-demo 
+EOF
 ```
 ```
 sudo iptables --list KUBE-NODEPORTS -t nat
