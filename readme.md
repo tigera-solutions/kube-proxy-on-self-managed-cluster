@@ -40,6 +40,7 @@ kubectl describe svc zone6 -n app-routable-demo
 ##### Accessing the service from within a pod
 ```
 kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
+$ curl http://zone1/app1
 ```
 
 ### So how is this implemented ?  
