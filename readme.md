@@ -36,7 +36,10 @@ These CLUSTER-IP are choosen from the service CIDR
 ```
 kubectl describe svc zone6 -n app-routable-demo
 ```
-
+##### Services are assigned from --service-cluster-ip-range
+```
+kubectl cluster-info   dump | grep -i  -m 1 service-cluster-ip-range
+```
 ##### Accessing the service from within a pod
 ```
 kubectl run -it --rm --image xxradar/hackon curler -n app-routable-demo -- bash
