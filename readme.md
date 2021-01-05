@@ -38,7 +38,8 @@ kubectl describe svc zone6 -n app-routable-demo
 ```
 ##### Services are assigned from --service-cluster-ip-range
 ```
-kubectl cluster-info   dump | grep -i  -m 1 service-cluster-ip-range
+kubectl cluster-info dump | grep -i  -m 1 service-cluster-ip-range
+kubectl cluster-info dump | grep -m 1 cluster-cidr
 ```
 ##### Accessing the service from within a pod
 ```
